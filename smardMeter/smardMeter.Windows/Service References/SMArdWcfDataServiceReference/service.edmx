@@ -1,0 +1,141 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="1.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="smardModel" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="adrmap_energymeter">
+        <Key>
+          <PropertyRef Name="address" />
+          <PropertyRef Name="type" />
+        </Key>
+        <Property Name="address" Type="Edm.Int32" Nullable="false" />
+        <Property Name="type" Type="Edm.Int32" Nullable="false" />
+        <Property Name="description" Type="Edm.String" MaxLength="50" FixedLength="false" Unicode="true" />
+        <Property Name="log_column" Type="Edm.String" MaxLength="16" FixedLength="false" Unicode="false" />
+      </EntityType>
+      <EntityType Name="log_energymeter">
+        <Key>
+          <PropertyRef Name="device" />
+          <PropertyRef Name="logtime" />
+        </Key>
+        <Property Name="device" Type="Edm.Int32" Nullable="false" />
+        <Property Name="logtime" Type="Edm.Int32" Nullable="false" />
+        <Property Name="p_in_l1_act" Type="Edm.Int32" />
+        <Property Name="p_in_l2_act" Type="Edm.Int32" />
+        <Property Name="p_in_l3_act" Type="Edm.Int32" />
+        <Property Name="p_in_all_act" Type="Edm.Int32" />
+        <Property Name="q_in_l1_act1" Type="Edm.Int32" />
+        <Property Name="q_in_l2_act1" Type="Edm.Int32" />
+        <Property Name="q_in_l3_act1" Type="Edm.Int32" />
+        <Property Name="q_in_all_act1" Type="Edm.Int32" />
+        <Property Name="s_in_l1_act1" Type="Edm.Int32" />
+        <Property Name="s_in_l2_act1" Type="Edm.Int32" />
+        <Property Name="s_in_l3_act1" Type="Edm.Int32" />
+        <Property Name="s_in_all_act1" Type="Edm.Int32" />
+        <Property Name="p_out_l1_act1" Type="Edm.Int32" />
+        <Property Name="p_out_l2_act1" Type="Edm.Int32" />
+        <Property Name="p_out_l3_act1" Type="Edm.Int32" />
+        <Property Name="p_out_all_act1" Type="Edm.Int32" />
+        <Property Name="q_out_l1_act1" Type="Edm.Int32" />
+        <Property Name="q_out_l2_act1" Type="Edm.Int32" />
+        <Property Name="q_out_l3_act1" Type="Edm.Int32" />
+        <Property Name="q_out_all_act1" Type="Edm.Int32" />
+        <Property Name="s_out_l1_act1" Type="Edm.Int32" />
+        <Property Name="s_out_l2_act1" Type="Edm.Int32" />
+        <Property Name="s_out_l3_act1" Type="Edm.Int32" />
+        <Property Name="s_out_all_act1" Type="Edm.Int32" />
+        <Property Name="cosphi_l1" Type="Edm.Int32" />
+        <Property Name="cosphi_l2" Type="Edm.Int32" />
+        <Property Name="cosphi_l3" Type="Edm.Int32" />
+        <Property Name="thd_l1" Type="Edm.Int32" />
+        <Property Name="thd_l2" Type="Edm.Int32" />
+        <Property Name="thd_l3" Type="Edm.Int32" />
+        <Property Name="v_l1" Type="Edm.Int32" />
+        <Property Name="v_l2" Type="Edm.Int32" />
+        <Property Name="v_l3" Type="Edm.Int32" />
+        <Property Name="p_in_l1_sum" Type="Edm.Int64" />
+        <Property Name="p_in_l2_sum" Type="Edm.Int64" />
+        <Property Name="p_in_l3_sum" Type="Edm.Int64" />
+        <Property Name="p_in_all_sum" Type="Edm.Int64" />
+        <Property Name="q_in_l1_sum" Type="Edm.Int64" />
+        <Property Name="q_in_l2_sum" Type="Edm.Int64" />
+        <Property Name="q_in_l3_sum" Type="Edm.Int64" />
+        <Property Name="q_in_all_sum" Type="Edm.Int64" />
+        <Property Name="s_in_l1_sum" Type="Edm.Int64" />
+        <Property Name="s_in_l2_sum" Type="Edm.Int64" />
+        <Property Name="s_in_l3_sum" Type="Edm.Int64" />
+        <Property Name="s_in_all_sum" Type="Edm.Int64" />
+        <Property Name="p_out_l1_sum" Type="Edm.Int64" />
+        <Property Name="p_out_l2_sum" Type="Edm.Int64" />
+        <Property Name="p_out_l3_sum" Type="Edm.Int64" />
+        <Property Name="p_out_all_sum" Type="Edm.Int64" />
+        <Property Name="q_out_l1_sum" Type="Edm.Int64" />
+        <Property Name="q_out_l2_sum" Type="Edm.Int64" />
+        <Property Name="q_out_l3_sum" Type="Edm.Int64" />
+        <Property Name="q_out_all_sum" Type="Edm.Int64" />
+        <NavigationProperty Name="smadevice" Relationship="smardModel.FK_log_energymeter_smadevice" ToRole="smadevice" FromRole="log_energymeter" />
+      </EntityType>
+      <EntityType Name="smadevice">
+        <Key>
+          <PropertyRef Name="deviceID" />
+        </Key>
+        <Property Name="deviceID" Type="Edm.Int32" Nullable="false" p6:StoreGeneratedPattern="Identity" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="devicetype" Type="Edm.Int32" Nullable="false" />
+        <Property Name="serialnumber" Type="Edm.Decimal" Precision="18" Scale="0" />
+        <Property Name="hostname" Type="Edm.String" MaxLength="50" FixedLength="false" Unicode="true" />
+        <Property Name="ipaddress" Type="Edm.String" MaxLength="50" FixedLength="false" Unicode="true" />
+        <Property Name="targetaddress" Type="Edm.String" MaxLength="50" FixedLength="false" Unicode="true" />
+        <Property Name="firmware" Type="Edm.String" MaxLength="50" FixedLength="false" Unicode="true" />
+        <NavigationProperty Name="log_energymeter" Relationship="smardModel.FK_log_energymeter_smadevice" ToRole="log_energymeter" FromRole="smadevice" />
+        <NavigationProperty Name="smadevicetype" Relationship="smardModel.FK_smadevice_smadevicetype" ToRole="smadevicetype" FromRole="smadevice" />
+      </EntityType>
+      <EntityType Name="smadevicetype">
+        <Key>
+          <PropertyRef Name="devicetypeID" />
+        </Key>
+        <Property Name="devicetypeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="devicetypeName" Type="Edm.String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        <Property Name="devicetypeClass" Type="Edm.String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        <NavigationProperty Name="smadevice" Relationship="smardModel.FK_smadevice_smadevicetype" ToRole="smadevice" FromRole="smadevicetype" />
+      </EntityType>
+      <Association Name="FK_log_energymeter_smadevice">
+        <End Type="smardModel.smadevice" Role="smadevice" Multiplicity="1" />
+        <End Type="smardModel.log_energymeter" Role="log_energymeter" Multiplicity="*" />
+        <ReferentialConstraint>
+          <Principal Role="smadevice">
+            <PropertyRef Name="deviceID" />
+          </Principal>
+          <Dependent Role="log_energymeter">
+            <PropertyRef Name="device" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="FK_smadevice_smadevicetype">
+        <End Type="smardModel.smadevicetype" Role="smadevicetype" Multiplicity="1" />
+        <End Type="smardModel.smadevice" Role="smadevice" Multiplicity="*" />
+        <ReferentialConstraint>
+          <Principal Role="smadevicetype">
+            <PropertyRef Name="devicetypeID" />
+          </Principal>
+          <Dependent Role="smadevice">
+            <PropertyRef Name="devicetype" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+    </Schema>
+    <Schema Namespace="sma_log2sql" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityContainer Name="smardEntities" m:IsDefaultEntityContainer="true" p6:LazyLoadingEnabled="true" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntitySet Name="adrmap_energymeter" EntityType="smardModel.adrmap_energymeter" />
+        <EntitySet Name="log_energymeter" EntityType="smardModel.log_energymeter" />
+        <EntitySet Name="smadevice" EntityType="smardModel.smadevice" />
+        <EntitySet Name="smadevicetype" EntityType="smardModel.smadevicetype" />
+        <AssociationSet Name="FK_log_energymeter_smadevice" Association="smardModel.FK_log_energymeter_smadevice">
+          <End Role="log_energymeter" EntitySet="log_energymeter" />
+          <End Role="smadevice" EntitySet="smadevice" />
+        </AssociationSet>
+        <AssociationSet Name="FK_smadevice_smadevicetype" Association="smardModel.FK_smadevice_smadevicetype">
+          <End Role="smadevice" EntitySet="smadevice" />
+          <End Role="smadevicetype" EntitySet="smadevicetype" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
