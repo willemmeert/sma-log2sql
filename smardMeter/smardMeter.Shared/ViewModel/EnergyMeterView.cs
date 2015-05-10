@@ -213,8 +213,8 @@ namespace smardMeter.ViewModel
             set;
         }
 
-        private const uint MAX_LOG_SIZE = 188*100;              // 3 minutes of log, + some extra seconds as buffer
-        private const uint TIMESTAMP_LOG_SIZE = 60 * 100;       // 1 minute to save as summed entry in log
+        private const uint MAX_LOG_SIZE = 188;            // 3 minutes of log, + some extra seconds as buffer
+        private const uint TIMESTAMP_LOG_SIZE = 60;       // 1 minute to save as summed entry in log
         private const String sNone = "<None>";
 
         // data binding private fields
@@ -367,13 +367,14 @@ namespace smardMeter.ViewModel
 
         async void socketUDP_MessageReceived(WNS.DatagramSocket sender, WNS.DatagramSocketMessageReceivedEventArgs args)
         {
+            DateTime dtNow = DateTime.Now.ToUniversalTime();
             DataReader dr = args.GetDataReader();
             EnergyMeterMessage emm = new EnergyMeterMessage();
-            Status s = emm.ParseMessageAsync(dr);
+            Status s = emm.ParseMessage(dr);
             dr.Dispose();
             if (s == Status.ok)
             {
-                System.Diagnostics.Debug.WriteLine("Incoming message sucessfully parsed at timestamp" + emm.timestamp.ToString());
+                System.Diagnostics.Debug.WriteLine("Incoming message sucessfully parsed at UTC " + dtNow.ToString() + " with SMA timestamp " + emm.timestamp.ToString());
                 this.logEMMessages.AddLast(emm);                    // save message to our log (in memory)
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
@@ -381,7 +382,7 @@ namespace smardMeter.ViewModel
                         this.UpdateLiveData(emm);
                     });
 #if WINDOWS_APP
-                EnergyMeter2db.CheckLogForDBUpdate(this.logEMMessages, EnergyMeterView.MAX_LOG_SIZE, EnergyMeterView.TIMESTAMP_LOG_SIZE);
+//                EnergyMeter2db.CheckLogForDBUpdate(this.logEMMessages, EnergyMeterView.MAX_LOG_SIZE, EnergyMeterView.TIMESTAMP_LOG_SIZE);
 #endif
             }
             else

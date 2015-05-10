@@ -22,7 +22,7 @@ namespace smardMeter.Data
         parseMsg_invaliddata
     }
 
-    public enum AddressType : short
+    public enum AddressType : byte
 	{
 		actual = 4,
 		summed = 8
@@ -104,7 +104,7 @@ namespace smardMeter.Data
         public const uint RAW_MESSAGE_NUMBER_OF_FIELDS = 58;    // expected (minimum) number of data fields in a UDP packet
 
         public int serial { get; set; }                 // serial number of the device
-        public int timestamp { get; set; }              // UTC timestamp of the message
+        public int timestamp { get; set; }              // SMA EnergyMeter timestamp of the message
 
         public EnergyMeterMessage()                     // public default constructor
         {
@@ -113,7 +113,7 @@ namespace smardMeter.Data
             msgData = new EnergyMeterDataDictionary();
         }
 
-        public Status ParseMessageAsync(WSS.DataReader dr)                  // parse raw message from a datareader (should have a complete message waiting)
+        public Status ParseMessage(WSS.DataReader dr)                  // parse raw message from a datareader (should have a complete message waiting)
         {
             dr.ByteOrder = WSS.ByteOrder.BigEndian;                         // SMA stream has BigEndian type numbers !
             if (dr.UnconsumedBufferLength < RAW_MESSAGE_LENGTH)
